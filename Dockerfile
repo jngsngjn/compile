@@ -1,6 +1,6 @@
 FROM openjdk:17
 
-ARG JAR_FILE=build/libs/simple1-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=build/libs/compile-0.0.1-SNAPSHOT.jar
 
 COPY ${JAR_FILE} app.jar
 
