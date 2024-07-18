@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Java Compiler</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("form").on("submit", function(event) {
+                event.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "/compile",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        sourceCode: $("#sourceCode").val()
+                    }),
+                    success: function(response) {
+                        $("#output").text(response.output);
+                    },
+                    error: function() {
+                        $("#output").text("An error occurred while compiling the code.");
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>Online Java Compiler</h1>
+<form>
+    <textarea id="sourceCode" name="sourceCode" rows="20" cols="80" placeholder="Enter your Java code here" th:text="${sourceCode}"></textarea><br/>
+    <button type="submit">Compile</button>
+</form>
+<h2>Result:</h2>
+<pre id="output" th:text="${output}"></pre>
+</body>
+</html>
